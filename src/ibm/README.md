@@ -1,14 +1,17 @@
 # Lande & Kirkpatrick's (1989) model with paternal effects
 
+## Looking at the code
+Everything is in the file `m_quantgen_matpat.cpp`. No dependencies except that your compiler should be able to take on `C++17`. You should be able to compile this on any Linux system or even visual studio or CodeBlocks.
+
 ## how to run?
 
 ### Compiling the simulation
-Simple, do this:
+On a Linux system with `g++` and `make` installed do this:
 ```
 cd src/ibm
 make
 ```
-If everything goes OK, there should now be an executable in the `ibm` directory.
+If everything goes OK, there should now be an executable (with extension `.exe`) in the `ibm` directory.
 
 ### Generating batch files (each line will run a single replicate simulation)
 First generate a batch file, each line of which reflects the parameters of
@@ -23,7 +26,7 @@ Make sure the total number of replicate simulations is not massive at the start.
 cd src/ibm 
 
 # run the batch file script and store output in my_batch_file.sh
-python3 generate_parameters > my_batch_file.sh
+python3 generate_parameters.py > my_batch_file.sh
 ```
 ### Running the batch file
 Run all the replicate simulations on a single core sequentially:
@@ -31,12 +34,12 @@ Run all the replicate simulations on a single core sequentially:
 bash my_batch_file.sh
 ```
 
-Run all the replicate simulations on `k` cores:
+Run all the replicate simulations but spread jobs across `k` cores:
 ```
 cat my_batch_file.sh | tr '\n' '\0' | xargs -0 -Pk -n1 sh -c
 ```
-where `k` should be replaced by the number of cores. So 25 cores would be written as:
+where `k` should be replaced by the number of cores. So distributing commands from a single batch file over 25 cores (don't try this at home on a humble 4-core laptop!) can be accomplished by
 ```
 cat my_batch_file.sh | tr '\n' '\0' | xargs -0 -P25 -n1 sh -c
 ```
-To make sure things keep running when you log off, run everything within GNU `screen`.
+To make sure things keep running when you log off, run everything within GNU `screen`. Otherwise everything will stop once the connection to the server is broken.
