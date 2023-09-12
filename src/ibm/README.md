@@ -28,7 +28,7 @@ cd src/ibm
 # run the batch file script and store output in my_batch_file.sh
 python3 generate_parameters.py > my_batch_file.sh
 ```
-### Running the batch file
+### Run replicate simulations using that batch file
 Run all the replicate simulations on a single core sequentially:
 ```
 bash my_batch_file.sh
