@@ -50,6 +50,8 @@ njobs = len(mu_hm) * len(mu_hp) * len(mu_m0) * len(mu_m1) * len(sinusoidal_frequ
 
 print(njobs)
 
+file_base_name = "output_"
+
 for rep_i in range(0, nreps):
     for mu_hm_i in mu_hm:
         for mu_hp_i in mu_hp:
@@ -83,6 +85,8 @@ for rep_i in range(0, nreps):
                                                     + str(A) + " "
                                                     + str(B_i) + " "
                                                     + str(s0) + " "
-                                                    + str(sigma_e_i) + " ")
+                                                    + str(sigma_e_i) + " "
+                                                    + file_base_name + str(ctr)
+                                                    )
 
                                     print(output_str)
